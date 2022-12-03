@@ -1,0 +1,357 @@
+body {
+  background-color: #F2F2F2;
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+/* Style Nav Bar */
+.navbar {
+  background: white;
+  padding: 1em;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* Style Nav Button */
+.nav-button {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+  box-sizing: border-box;
+  color: #121212;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 1 1 auto;
+  font-family: Inter,sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  padding: 1rem 1.2rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s,-webkit-box-shadow .2s;
+  white-space: nowrap;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.nav-button:hover {
+  box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+}
+
+
+/* Style Wishlistn HTML */
+.block {
+  margin: auto;
+  width: 90%;
+  border: none;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Remove margins and padding from the list */
+section ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the list items */
+section ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  background: #eee;
+  font-size: 18px;
+  transition: 0.2s;
+
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+section ul li:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+/* Darker background-color on hover */
+section ul li:hover {
+  background: #ddd;
+}
+
+/* When clicked on, add a background color and strike out text */
+section ul li.checked {
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+/* Add a "checked" mark when clicked on */
+section ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+/* Style the close button */
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  background-color: #1F18C0;
+  color: white;
+}
+
+/* Style the header */
+#wishlist {
+  margin-left: 50px;
+  font-size: 48px;
+  color: #0d172a
+}
+
+.header {
+  background-color: #1F18C0;
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+}
+
+/* Clear floats after the header */
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the input */
+#myInput {
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  width: 40%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+#linktoInput {
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  width: 40%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+/* Style the "Add" button */
+.addBtn {
+  margin: 5px;
+  padding: 10px;
+  width: 5%;
+  border: 1px solid #ccc;
+  background: #d9d9d9;
+  color: #555;
+  float: right;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}
+
+/* visited link */
+#myUL :visited {
+  color: #016064;
+} 
+
+/* mouse over link */
+#myUL :hover {
+  color: #52B2BF;
+} 
+
+/* selected link */
+#myUL :active {
+  color: #016064;
+} 
+
+
+/* Style Edit HTML */
+/* Style Profile Img */
+.user-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin: 5% 50%
+}
+
+#photo {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+}
+
+#file {
+  display: none
+}
+
+#uploadbtn {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  padding: 6px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #fff;
+  transform: translateX(-90%);
+  margin-top: 180px;
+  background-color: #B8D7E9;
+  box-shadow: 2px 4px 4px rgb(0, 0, 0, 0.644);
+}
+
+#publicProfile {
+  margin-left: 50px;
+  font-size: 48px;
+  color: #0d172a
+}
+
+.box {
+  margin-top: 50px;
+  float: left;
+  width: 40%;
+  padding: 50px;
+  font-size: 20px;
+}
+
+/* Style the input */
+.smallEditBox {
+  margin-bottom: 20px;
+  padding-right: 50px;
+  padding-bottom: 10px;
+}
+
+.bigEditBox {
+  margin-bottom: 20px;
+  padding-right: 300px;
+  padding-bottom: 200px;
+}
+
+.editBtn {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.editBtn:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .editBtn {
+    padding: 0.25em 0.75em;
+  }
+}
+
+
+/* Style Profile HTML */
+.homeContainer {
+  margin: auto;
+  width: 80%;
+  padding: 200px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 30px;
+}
+
+.subhead{
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+
+/* CSS Link Button */
+.link-button {
+  background-color: #fff;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  display: block;
+  width: 25%;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none black solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.link-button:hover {
+  background-color: #1F18C0;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .link-button {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+  }
+}

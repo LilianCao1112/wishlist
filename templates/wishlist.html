@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="container">
+            <nav class="nav">
+                <ul>
+                    <li class="nav-button" id="home">Home</li>
+                </ul>
+                <ul>
+                    <li class="nav-button" id="profile">Your Profile</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <h1 id="wishlist">Wish List</h1>
+            <div class="block">
+                <form action="/wishlist" method="post">
+                    <div class="header" id="product">
+                        <input type="text" name="itemname" id="myInput" placeholder="Name of the product you want...">
+                        <input type="text" name="link" id="linktoInput" placeholder="Link to the product...">
+                        <span onclick="newElement()" class="addBtn">Add</span>
+                        <!-- <input type="submit" class="addBtn"> -->
+                    </div>
+                </form>
+
+                <ul id="myUL">
+                    {% for item in items -%}
+                    {% if item.state == 0 %}
+                    <li class="product" id="{{ item.id }}"><a href="{{ item.link }}">{{ item.itemname }}</a></li>
+                    {% else %}
+                    <li class="product checked" id="{{ item.id }}"><a href="{{ item.link }}">{{ item.itemname }}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    <!-- <li class="product"><a
+                            href="https://www.chanel.com/us/fashion/p/AS3261B08872NK297/chanel-22-handbag-calfskin-silver-tone-metal/">Chanel Bag 22</a></li>
+                        <li class="checked product"><a
+                            href="https://www.diptyqueparis.com/en_us/p/figuier-fig-tree-candle-190g.html">Diptyque Fig Candel</a></li>
+                        <li class="product"><a
+                            href="https://www.amazon.com/Chopin-Ultimate-Collection-Schirmer-Schirmers/dp/148033278X/ref=sr_1_8?crid=17X11ZKCOQ78S&keywords=Chopin+Music+Score&qid=1666986247&sprefix=chopin+music+score%2Caps%2C137&sr=8-8">Chopin Music Score</a></li>
+                        <li class="product"><a
+                                href="https://www.nike.com/t/air-force-1-high-se-womens-shoes-X6v8pV/DQ7584-100">Nike Air
+                                Force</a></li>
+                        <li class="product"><a
+                            href="https://www.apple.com/macbook-pro-13/?afid=p238%7CsBcTRtyeB-dc_mtid_1870765e38482_pcrid_626304509494_pgrid_111487297418_pntwk_g_pchan__pexid_52811387804_&cid=aos-us-kwgo-mac--slid-kR89P3rM--product-">Latesed Macbook Pro</a></li>
+                        <li class="product"><a
+                            href="https://www.bso.org/events/dvorak-szymanowski-lutoslawski">Boston Symphony Ticket</a></li> -->
+
+                </ul>
+            </div>
+
+
+
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("home").onclick = function () {
+            location.href = "/";
+        };
+        document.getElementById("profile").onclick = function () {
+            location.href = "/edit";
+        };
+
+        // Create a "close" button and append it to each list item
+        var myNodelist = document.getElementsByClassName('product');
+        var i;
+        for (i = 0; i < myNodelist.length; i++) {
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            myNodelist[i].appendChild(span);
+        }
+
+        // Click on a close button to hide the current list item
+        var close = document.getElementsByClassName("close");
+        var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function (ev) {
+                ev.stopPropagation();
+
+                var div = this.parentElement;
+                console.log(div.id)
+                div.style.display = "none";
+
+                const state = { state: 2, id: div.id };
+                console.log('xxx')
+                fetch('/itemstate', {
+                    method: 'POST', // or 'PUT'
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(state),
+                })
+            }
+        }
+
+        // Add a "checked" symbol when clicking on a list item
+        var list = document.getElementsByClassName('product');
+        var i;
+        for (i = 0; i < list.length; i++) {
+            list[i].addEventListener('click', function (ev) {
+                console.log('yyy')
+                ev.target.classList.toggle('checked');
+
+                const state = { state: 1, id: ev.target.id };
+                fetch('/itemstate', {
+                    method: 'POST', // or 'PUT'
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(state),
+                })
+            }, false);
+        }
+
+
+        // Create a new list item when clicking on the "Add" button
+        function newElement() {
+            var li = document.createElement("li");
+            li.className = 'product'
+            var inputValue = document.getElementById("myInput").value;
+            var t = document.createTextNode(inputValue);
+
+            var a = document.createElement('a');
+            var linkValue = document.getElementById('linktoInput').value;
+            var l = document.createTextNode(inputValue);
+            a.append(l);
+            a.href = linkValue;
+
+            const data = { itemname: inputValue, link: linkValue };
+            fetch('/wishlist', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+
+
+
+
+            li.appendChild(a);
+            if (inputValue === '') {
+                alert("You must write something!");
+            } else {
+                document.getElementById("myUL").appendChild(li);
+            }
+            document.getElementById("myInput").value = "";
+            document.getElementById("linktoInput").value = "";
+
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    var div = this.parentElement;
+                    div.style.display = "none";
+
+                    const state = { state: 2, id: li.id };
+                    fetch('/itemstate', {
+                        method: 'POST', // or 'PUT'
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(state),
+                    })
+                }
+            }
+
+            li.addEventListener('click', function (ev) {
+                ev.target.classList.toggle('checked');
+
+                const state = { state: 1, id: li.id };
+                fetch('/itemstate', {
+                    method: 'POST', // or 'PUT'
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(state),
+                })
+            }, false);
+
+
+
+        }
+    </script>
+</body>
+
+</html>

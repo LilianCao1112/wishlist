@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+</head>
+<body>
+    
+    <div class="navbar">
+        <div class="container">
+            <nav class="nav">
+                <ul>
+                    <li class="nav-button" id="home">Home</li>
+                </ul>
+                <ul>
+                    <li class="nav-button" id="profile">Your Profile</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="homeContainer">
+            <div class="mid-col">
+                <img src="{{ url_for('static', filename=user.image_file) }}" id="photo">
+                <p class="subhead">{{ user.username }}</p>
+                
+                <span class="subhead">175 following</span>
+                <span class="subhead">282 followers</span>
+                
+                <div class="hero-cta">
+                    <p class="link-button" id="editProfile">Edit Profile</p>
+                    <p class="link-button" id="editWishList">Wish List</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+
+
+<script>
+    document.getElementById("home").onclick = function () {
+        location.href = "/";
+    };
+    document.getElementById("profile").onclick = function () {
+        location.href = "/edit";
+    };
+
+    document.getElementById("editProfile").onclick = function () {
+        location.href = "/edit";
+    };
+    document.getElementById("editWishList").onclick = function () {
+        location.href = "/wishlist";
+    };
+
+
+
+
+
+
+</script>
+
+</html>

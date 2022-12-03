@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="container">
+            <nav class="nav">
+                <ul>
+                    <li class="nav-button" id="home">Home</li>
+                </ul>
+                <ul>
+                    <li class="nav-button" id="profile">Your Profile</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="edittingContainer">
+            <h1 id="publicProfile">Public Profile</h1>
+
+        <form action="/edit" method="post" enctype=multipart/form-data>
+            <div class="box">
+                <div class="user-img">
+                    <img src="{{ url_for('static', filename=user.image_file) }}" id="photo">
+                    <input type="file" id="file" name="imagefile">
+                    <label for="file" id="uploadbtn"><i class="fa fa-camera" style="font-size:47px"></i></label>
+                </div>
+            </div>
+
+            <div class="box">
+                    <h2>First name</h2>
+                    <input type="text" class="smallEditBox" name="firstName" id="firstName">
+                    <h2>Last name</h2>
+                    <input type="text" class="smallEditBox" name="lastName" id="lastName">
+                    <h2>Username</h2>
+                    <input type="text" class="smallEditBox" name="username" id="username">
+                    <h2>About</h2>
+                    <input type="text" class="bigEditBox" id="about" name="tellYourStory
+                    " placeholder="Tell your story">
+
+                    <input class="editBtn" type="submit" id="save" value="save" action="save"></input>
+                </form>
+            </div>
+        </form>
+
+
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("home").onclick = function () {
+            location.href = "/";
+        };
+        document.getElementById("profile").onclick = function () {
+            location.href = "/edit";
+        };
+
+        //Change Profile Image
+        const imgDiv = document.querySelector('.user-img');
+        const img = document.querySelector('#photo');
+        const file = document.querySelector('#file');
+        const uploadbtn = document.querySelector('#uploadbtn');
+
+        file.addEventListener('change', function () {
+            const chosedfile = this.files[0];
+            if (chosedfile) {
+                const reader = new FileReader();
+
+                reader.addEventListener('load', function () {
+                    img.setAttribute('src', reader.result);
+                })
+
+                reader.readAsDataURL(chosedfile);
+
+            }
+        })
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
